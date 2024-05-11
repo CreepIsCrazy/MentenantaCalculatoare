@@ -7,6 +7,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Calculatoare.API", "Calcula
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Calculatoare.Data", "Calculatoare.Data\Calculatoare.Data.csproj", "{D9E8B318-79BB-4271-B7DB-70C927607279}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{2C0B41F5-DE1F-432C-943D-705E6C3C7244}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Calculatoare.Shared", "Calculatoare.Shared\Calculatoare.Shared.csproj", "{F966216F-4333-48E2-9D12-7EC180D2D495}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +28,10 @@ Global
 		{D9E8B318-79BB-4271-B7DB-70C927607279}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D9E8B318-79BB-4271-B7DB-70C927607279}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D9E8B318-79BB-4271-B7DB-70C927607279}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F966216F-4333-48E2-9D12-7EC180D2D495}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F966216F-4333-48E2-9D12-7EC180D2D495}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F966216F-4333-48E2-9D12-7EC180D2D495}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F966216F-4333-48E2-9D12-7EC180D2D495}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

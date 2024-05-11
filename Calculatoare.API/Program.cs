@@ -1,3 +1,4 @@
+using Calculatoare.API.Services.User;
 using Calculatoare.Data.Context;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,6 +16,8 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<CalculatoareContext>(options => 
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 #endregion
+
+builder.Services.AddScoped<IUserService, UserService>();    
 
 var app = builder.Build();
 
