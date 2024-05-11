@@ -1,6 +1,6 @@
 ﻿namespace Calculatoare.Shared.User;
 
-public enum UserStatus
+public enum UserType
 {
     Admin = 1,
     Employee,

@@ -4,4 +4,21 @@
 GET {{Calculatoare.API_HostAddress}}/user/
 Accept: application/json
 
-###
+### REGISTER
+POST {{Calculatoare.API_HostAddress}}/authentication/register
+Content-Type: application/json
+
+{
+    "username": "admin",
+    "password": "admin",
+    "type": 1
+}
+
+### LOGIN
+POST {{Calculatoare.API_HostAddress}}/authentication/login
+Content-Type: application/json
+
+{
+    "username": "admin",
+    "password": "admin"
+}
