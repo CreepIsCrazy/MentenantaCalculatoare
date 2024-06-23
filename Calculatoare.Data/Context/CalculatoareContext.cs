@@ -34,124 +34,98 @@ public partial class CalculatoareContext : DbContext
     {
         modelBuilder.Entity<order>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__order__3214EC075C9CAA97");
+            entity.HasKey(e => e.Id).HasName("PK__order__3214EC07C392DF18");
 
             entity.Property(e => e.DateCreated).HasColumnType("datetime");
             entity.Property(e => e.LastModified).HasColumnType("datetime");
-            entity.Property(e => e.Notes).HasMaxLength(1);
 
             entity.HasOne(d => d.Customer).WithMany(p => p.orderCustomer)
                 .HasForeignKey(d => d.CustomerId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__order__CustomerI__1AD3FDA4");
+                .HasConstraintName("FK__order__CustomerI__31B762FC");
 
             entity.HasOne(d => d.Employee).WithMany(p => p.orderEmployee)
                 .HasForeignKey(d => d.EmployeeId)
-                .HasConstraintName("FK__order__EmployeeI__1BC821DD");
+                .HasConstraintName("FK__order__EmployeeI__32AB8735");
 
             entity.HasOne(d => d.Status).WithMany(p => p.order)
                 .HasForeignKey(d => d.StatusId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__order__StatusId__1CBC4616");
+                .HasConstraintName("FK__order__StatusId__339FAB6E");
         });
 
         modelBuilder.Entity<order_service>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__order_se__3214EC07871AF692");
+            entity.HasKey(e => e.Id).HasName("PK__order_se__3214EC0721EAD0CA");
 
             entity.HasOne(d => d.Order).WithMany(p => p.order_service)
                 .HasForeignKey(d => d.OrderId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__order_ser__Order__2180FB33");
+                .HasConstraintName("FK__order_ser__Order__3864608B");
 
             entity.HasOne(d => d.Service).WithMany(p => p.order_service)
                 .HasForeignKey(d => d.ServiceId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__order_ser__Servi__22751F6C");
+                .HasConstraintName("FK__order_ser__Servi__395884C4");
         });
 
         modelBuilder.Entity<order_status>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__order_st__3214EC07895C49DF");
+            entity.HasKey(e => e.Id).HasName("PK__order_st__3214EC075E7F8F53");
 
-            entity.Property(e => e.Status)
-                .IsRequired()
-                .HasMaxLength(1);
+            entity.Property(e => e.Status).IsRequired();
         });
 
         modelBuilder.Entity<review>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__review__3214EC070398A983");
-
-            entity.Property(e => e.Notes).HasMaxLength(1);
+            entity.HasKey(e => e.Id).HasName("PK__review__3214EC07DCD79812");
 
             entity.HasOne(d => d.User).WithMany(p => p.review)
                 .HasForeignKey(d => d.UserId)
-                .HasConstraintName("FK__review__UserId__160F4887");
+                .HasConstraintName("FK__review__UserId__2CF2ADDF");
         });
 
         modelBuilder.Entity<service>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__service__3214EC07B5AF4B70");
+            entity.HasKey(e => e.Id).HasName("PK__service__3214EC07306A4933");
 
-            entity.Property(e => e.Description)
-                .IsRequired()
-                .HasMaxLength(1);
-            entity.Property(e => e.Title)
-                .IsRequired()
-                .HasMaxLength(1);
+            entity.Property(e => e.Description).IsRequired();
+            entity.Property(e => e.Title).IsRequired();
         });
 
         modelBuilder.Entity<user>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__user__3214EC0723B0EB4D");
+            entity.HasKey(e => e.Id).HasName("PK__user__3214EC0717688A21");
 
             entity.Property(e => e.DateCreated).HasColumnType("datetime");
-            entity.Property(e => e.Email).HasMaxLength(1);
             entity.Property(e => e.LastModified).HasColumnType("datetime");
-            entity.Property(e => e.Password)
-                .IsRequired()
-                .HasMaxLength(1);
-            entity.Property(e => e.Username)
-                .IsRequired()
-                .HasMaxLength(1);
+            entity.Property(e => e.Password).IsRequired();
+            entity.Property(e => e.Username).IsRequired();
 
             entity.HasOne(d => d.Details).WithMany(p => p.user)
                 .HasForeignKey(d => d.DetailsId)
-                .HasConstraintName("FK__user__DetailsId__1332DBDC");
+                .HasConstraintName("FK__user__DetailsId__2A164134");
 
             entity.HasOne(d => d.Type).WithMany(p => p.user)
                 .HasForeignKey(d => d.TypeId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__user__TypeId__123EB7A3");
+                .HasConstraintName("FK__user__TypeId__29221CFB");
         });
 
         modelBuilder.Entity<user_detail>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__user_det__3214EC071DD17FAD");
+            entity.HasKey(e => e.Id).HasName("PK__user_det__3214EC07EFEA4951");
 
-            entity.Property(e => e.Adress).HasMaxLength(1);
-            entity.Property(e => e.City).HasMaxLength(1);
-            entity.Property(e => e.Country).HasMaxLength(1);
-            entity.Property(e => e.Firstname)
-                .IsRequired()
-                .HasMaxLength(1);
-            entity.Property(e => e.Lastname)
-                .IsRequired()
-                .HasMaxLength(1);
-            entity.Property(e => e.Phone)
-                .IsRequired()
-                .HasMaxLength(1);
-            entity.Property(e => e.ZipCode).HasMaxLength(1);
+            entity.Property(e => e.Firstname).IsRequired();
+            entity.Property(e => e.Lastname).IsRequired();
+            entity.Property(e => e.Phone).IsRequired();
         });
 
         modelBuilder.Entity<user_type>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__user_typ__3214EC07494ED94D");
+            entity.HasKey(e => e.Id).HasName("PK__user_typ__3214EC073BB3FFA3");
 
-            entity.Property(e => e.Type)
-                .IsRequired()
-                .HasMaxLength(1);
+            entity.Property(e => e.Type).IsRequired();
         });
 
         OnModelCreatingPartial(modelBuilder);

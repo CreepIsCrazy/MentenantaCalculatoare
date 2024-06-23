@@ -2,6 +2,7 @@
 @using Calculatoare.Shared.Order
 @layout EmptyLayout
 @inject ILocalStorageService LocalStorage
+@inject IJSRuntime JSRuntime
 
 <html>
 <head>
@@ -132,7 +133,15 @@
 
     private async Task DecreaseQuantity(Item item)
     {
-        item.Quantity--;
+        if (item.Quantity == 1)
+        {
+            bool confirmed = await JSRuntime.InvokeAsync<bool>("confirm", $"Are you sure you want to remove item\n\n{item.Name}?");
+            if (!confirmed)
+                return;
+
+            _Cart.Items.Remove(_Cart.Items.Find(x => x.ItemId == item.ItemId));
+        }
+        else item.Quantity--;
 
         await LocalStorage.SetItemAsync("cart", _Cart);
 

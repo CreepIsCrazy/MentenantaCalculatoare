@@ -356,9 +356,10 @@
         if (_Cart is null)
             _Cart = new();
 
-        var cartItem = await _Cart.Items.FirstOrDefaultAsync(x=>x.)
-        if (_Cart)
-        _Cart.Items.Add(item);
+        var cartItem = _Cart.Items.FirstOrDefault(x => x.ItemId == item.ItemId);
+        if (cartItem is null)
+            _Cart.Items.Add(item);
+        else cartItem.Quantity++;
 
         await LocalStorage.SetItemAsync("cart", _Cart);
 
