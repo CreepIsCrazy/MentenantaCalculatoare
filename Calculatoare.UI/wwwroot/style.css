@@ -1,0 +1,757 @@
+ * {
+    margin: 0;
+    padding: 0;
+     font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+html{
+    scroll-behavior: smooth;
+}
+
+.header {
+    min-height: 100vh;
+    width: 100%;
+    background-image: linear-gradient(rgba(4, 9, 30, 0.7), rgba(4, 9, 30, 0.7)),url(image/banner.png);
+    background-position: center;
+    background-size: cover;
+    position: relative;
+}
+nav{
+    display: flex;
+    padding: 2% 6;
+    justify-content: space-between;
+    align-items: center;
+}
+nav img{
+    width: 150px;
+}
+.nav-links{
+    flex: 1;
+    text-align: justify;
+}
+.nav-links ul li{
+    list-style: none;
+    display: inline-block;
+    padding: 8px 12px;
+    position: relative;
+}
+.nav-links ul li a{ 
+    color: #fff;
+    text-decoration: none;
+    font-size: 13px;
+}
+.nav-links ul li::after{
+    content: '';
+    width: 0%;
+    height: 2px;
+    background: #f44336;
+    display: block;
+    margin: auto;
+    transition: 0.5s;
+}
+.nav-links ul li:hover::after{
+    width: 100%;
+}
+.text-box {
+    width: 90%;
+    color: #fff;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    text-align: center;
+}
+.text-box h1{
+    font-size: 40px;
+}
+.text-box p{
+    margin: 10px 0 40px;
+    font-size: 15px;
+    color: #fff;
+}
+.hero-btn{
+    display: inline-block;
+    text-decoration: none;
+    color: #fff;
+    border: 1px solid #fff;
+    padding: 12px 34px;
+    font-size: 13px;
+    background: #AFAFAF;
+    position: relative;
+    cursor: pointer;
+}
+.hero-btn:hover{
+    border: 1px solid #999999;
+    background: #444444;
+    transition: 1s;
+}
+
+nav .fa{
+    display: none;
+}
+
+/*-------Adaugare meniu pentru telefon-------*/
+
+@media(max-width: 700px){
+    .text-box h1{
+    font-size: 20px;
+}
+    .nav-links ul li{
+        display: block;
+}
+    .nav-links{
+        position: fixed;
+        background: #391D47;
+        height: 100vh;
+        width: 200px;
+        top: 0;
+        right: -200px;
+        text-align: left;
+        z-index: 2;
+        transition: 1s;
+        
+    }
+    nav .fa{
+        display: block;
+        color: #fff;
+        margin: 10px;
+        font-size: 22px;
+        cursor: pointer;
+    }
+    .loginmobil{
+        display: block;
+        text-align: right;
+        top: 20px;
+        right: 25px;
+        width: 88%;
+        cursor: pointer;
+        margin: 10px;
+        color: #fff;
+        font-size: 22px;
+    }
+    
+    .nav-links ul{
+        padding: 30px;
+    }
+}
+
+/*-------Sectiune Servicii-------*/
+
+.servicii{
+    width: 80%;
+    margin: auto;
+    text-align: center;
+    padding-top: 100px;
+    min-height: auto;
+}
+h1{
+    font-size: 36px;
+    font-weight: 600;
+}
+
+p{
+    color: #777;
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 22px;
+    padding: 10px;
+}
+
+.row{
+    margin-top: 5%;
+    display: flex;
+    justify-content: space-between;
+}
+.servicii-col{
+    flex-basis: 31%;
+    background: #FFC4C4;
+    border-radius: 10px;
+    margin-bottom: 5%;
+    padding: 20px 12px;
+    box-sizing: border-box;
+}
+h3{
+    text-align: center;
+    font-weight: 600;
+    margin: 10px 0;
+}
+.servicii-col:hover{
+    box-shadow: 0 0 20px 0px rgba(0,0,0,0.2);
+}
+
+/*-------Asezare in pagina pentru telefon-------*/
+
+@media(max-width: 700px){
+    .row{
+        flex-direction: column;
+    }
+}
+
+/*-------Setiunea de curatare-------*/
+
+.curatare{
+    width: 80%;
+    margin: auto;
+    text-align: center;
+    padding-top: 50px;
+}
+.curatare-col{
+    flex-basis: 32%;
+    border-radius: 10px;
+    margin-bottom: 30px;
+    position: relative;
+    overflow: auto;
+}
+.curatare-col img{
+    width: 100%;
+    display: block;
+}
+.layer{
+    background: transparent;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: 0.5s;
+}
+.layer:hover{
+    background: rgba(168,168,168,0.7);
+}
+.layer h3{
+    width: 100%;
+    font-weight: 500;
+    color: #fff;
+    font-size: 26px;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    position: absolute;
+    opacity: 0;
+    transition: 0.5s;
+}
+.layer:hover h3{
+    bottom: 49%;
+    opacity:1;
+}
+
+/*-------Beneficiile noastre-------*/
+
+.evidenta{
+    width: 80%;
+    margin: auto;
+    text-align: center;
+    padding-top: 100px;
+}
+.evidenta-col{
+    flex-basis: 18%;
+    border-radius: 10px;
+    margin-bottom: 5%;
+    text-align: left;
+}
+.evidenta-col img{
+    width: 100%;
+    border-radius: 10px;
+}
+.evidenta-col p{
+    padding: 0;
+}
+.evidenta-col h3{
+    margin-top: 16px;
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+/*-------Background-------*/
+
+.background{
+    width: 100%;
+    margin: auto;
+    background: transparent;
+    background-attachment: fixed;
+    background-repeat: repeat;
+    background-image: linear-gradient(to bottom, #cccccc, #FFFFFF);
+    background-position: auto;
+}
+
+/*-------Recenzii-------*/
+
+.recenzii{
+    width: 80%;
+    margin: auto;
+    padding-top: 100px;
+    text-align: center;
+}
+.recenzii-col{
+    flex-basis: 44%;
+    border-radius: 10px;
+    margin-bottom: 5%;
+    text-align: left;
+    background: #fff3f3;
+    padding: 25px;
+    cursor: pointer;
+    display: flex;
+}
+.recenzii-col img{
+    height: 40px;
+    margin-left: 5px;
+    margin-right: 30px;
+    border-radius: 50%;
+}
+.recenzii-col p{
+    padding: 0
+}
+.recenzii-col h3{
+    margin-top: 15px;
+    text-align: left;
+}
+.recenzii-col .fa{
+    color: #f44336;
+}
+@media(max-width: 700px){
+    .recenzii-col img{
+    margin-left: 0px;
+    margin-right: 15px;
+    }
+}
+
+/*-------contactare-------*/
+
+.cta{
+    margin: 100px auto;
+    width: 80%;
+    background-image: linear-gradient(rgba(0,0,0,0.7),rgba(0,0,0,0.7)),url(image/contact.png);
+    background-position: center;
+    background-size: cover;
+    border-radius: 10px;
+    text-align: center;
+    padding: 100px 0;
+}
+.cta h1{
+    color: #fff;
+    margin-bottom: 40px;
+    padding: 0;
+}
+@media(max-width: 700px){
+    .cta h1{
+        font-size: 24px;
+    }
+}
+.detalii{
+    width: 400px;
+    height: 100%;
+    margin: auto;
+    /*border: 1px solid black;*/
+    border-style: solid;
+    border-color: #B6C7D6;
+    border-radius: 20px;
+    background-color: #EAF0F6;
+    text-align: center;
+    /*padding: 30px 0;*/
+}
+.detalii h4{
+    margin-bottom: 25px;
+    margin-top: 20px;
+    font-weight: 600;
+}
+
+.login {
+    display: flex;
+    gap: 10px;
+    padding: 10px 20px;
+}
+
+.login-item {
+    color: #fff;
+    font-size: 22px;
+}
+
+/*.login * {*/
+    /*display: block;*/
+    /*position:relative;
+    width: 88%;
+    top: 20px;
+    color: #fff;
+    font-size: 22px;
+}*/
+
+/*-------Despre noi-------*/
+
+.sub-header{
+    height: 50vh;
+    width: 100%;
+    background-image: linear-gradient(rgba(4,9,30,0.7),rgba(4,9,30,0.7)),url(image/banner.png);
+    background-position: center;
+    background-size: cover;
+    text-align: center;
+    color: #fff;
+}
+
+    .sub-header h1 {
+        margin-top: 11px;
+    }
+
+.about{
+    width: 80%;
+    margin: auto;
+    padding-top: 20px;
+    padding-bottom: 50px;
+}
+
+.about-col{
+    flex-basis: 48%;
+    padding: 30px 2px;
+}
+.about-col img{
+    width: 100%;
+}
+.red-btn{
+    border: 1px solid #f44336;
+    color: #f44336
+}
+.red-btn:hover{
+    color: #fff;
+}
+
+/*-------Sectiunea de servicii-------*/
+.border{
+    width: 80%;
+    margin: auto;
+    text-align: center;
+    padding-top: 20px;
+    padding-bottom: 50px;
+}
+.border-col{
+    flex-basis: 19%;
+    border-radius: 10px;
+    margin-bottom: 30px;
+    position: relative;
+    overflow: auto;
+} 
+.border-col img{
+    width: 90%;
+    display: block;
+    padding: 10px;
+}
+.cutie{
+    border: 1px solid black;
+    border-radius: 10px;
+}
+.border h4{
+    font-size: 18px;
+    text-align: left;
+    margin-top: 10px;
+}
+.border h3{
+    text-align: left;
+    margin-left: 20px;
+}
+.border-col:hover{
+    margin: 3px;
+}
+.border button{
+margin-top: 1px;
+position: relative;
+border-radius: 50px;
+}
+.hero-btnn:hover{
+    border: 1px solid #999999;
+    background: #D05340;
+    transition: 1s;
+}
+.line hr{
+  margin-top: 220px;
+  opacity: 0.5;
+}
+.da {
+    margin-top: 20px;
+    width: 100%;
+    height: 1px;
+    background-color: grey;
+    opacity: 0.5;
+}
+/*-------Contact-------*/
+
+.locatie{
+    width: 80%;
+    margin: auto;
+    padding: 80px 0;
+}
+.locatie iframe{
+    width: 100%;
+}
+.contact{
+    width: 80%;
+    margin: auto;
+}
+.contact-col{
+    flex-basis: 48%;
+    margin-bottom: 30px;
+}
+contact-col div{
+    display: flex;
+    align-items: center;
+    margin-bottom: 40px;
+}
+.contact-col div.fa{
+    font-size: 28px;
+    margin: 10px;
+    margin-right: 30px;
+}
+.contact-col div p{
+    padding: 0;
+}
+.contact-col div h5{
+    font-size: 20px;
+    margin-bottom: 5px;
+    color: #555;
+    font-weight: 400;
+}
+.contact-col input, .contact-col textarea{
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 17px;
+    outline: none;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+
+/*------- Register -------*/
+
+}
+.register{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container{
+    max-width: 650px;
+    padding: 28px;
+    margin: 0 28px;
+    border-radius: 10px;
+    overflow: hidden;
+    background: rgba(0,0,0,0.2);
+    box-shadow: 0 15px 20px rgba(0,0,0,0.6);
+}
+
+.container h2{
+    font-size: 26px;
+    font-weight: bold;
+    text-align: left;
+    color: #fff;
+    padding-bottom: 8px;
+    border-bottom: 1px solid silver;
+}
+
+.content{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 20px 0;
+}
+
+.input-box{
+    display: flex;
+    flex-wrap: wrap;
+    width: 50%;
+    padding-bottom: 15px;
+}
+
+.input-box:nth-child(2n){
+    justify-content: end;
+}
+
+.input-box label{
+    width: 95%;
+    color: #fff;
+    font-weight: bold;
+    margin: 5px 0;
+}
+
+.input-box input{
+    height: 40px;
+    width: 95%;
+    padding: 0 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    outline: none;
+}
+
+.input-box input:is(:focus,:valid){
+    box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+}
+
+.button-container{
+    margin: 15px 0;
+}
+
+.button-container button{
+    width: 100%;
+    margin-top: 10px;
+    padding: 10px;
+    display: block;
+    font-size: 20px;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    background-image: linear-gradient(to right,#61045f, #aa076b);
+    cursor: pointer;
+}
+
+@media{
+    .container{
+        min-width: 280px;
+    }
+
+    .content{
+        max-height: 380px;
+        overflow: auto;
+    }
+
+    .input-box{
+        margin-bottom: 12px;
+        width: 100%;
+    }
+
+    .input-box:nth-child(2n){
+        justify-content: space-between;
+    }
+
+    .content::-webkit-scrollbar{
+        width: 5%;
+    }
+}
+
+/*-------PRINTER-------*/
+
+.print-content{
+    width: 80%;
+    margin: auto;
+    padding: 60px 0;
+}
+
+.print-left{
+    flex-basis: 65%;
+}
+.print-left img{
+    width: 100%;
+}
+
+.print-left h2{
+    color: #222;
+    font-weight: 600;
+    margin: 30px 0;
+}
+
+.print-right{
+    flex-basis: 32%;
+}
+
+.print-right h3{
+    background: #f44336;
+    color: #fff;
+    padding: 7px 0;
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+.print-right div{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #555;
+    padding: 8px;
+    box-sizing: border-box;
+}
+
+.print-right img{
+    width: 120%;
+}
+/*-------Shopping Cart-------*/
+
+.shop{
+    width: 100%;
+    background-color: #353432;
+    color: #eee;
+    position: fixed;
+    display: grid;
+    grid-template-rows: 70px 1fr 70px;
+}
+
+.shop .btn{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.shop .btn button{
+    background-color: #f44336;
+    border: none;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.shop .btn .close{
+    background-color: #eee;
+}
+
+.shop .listcart .item img{
+    width: 100%;
+}
+
+.shop .listcart .item{
+    display: grid;
+    grid-template-columns: 70px 150px 150px 1fr;
+    grid-gap: 50px;
+    text-align: center;
+    align-items: center;
+}
+
+.shop .quantity span{
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    background-color: #eee;
+    color: #555;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.shop .quantity span:nth-child(2){
+    background-color: transparent;
+    color: #eee;
+}
+
+.shop .item:nth-child(even){
+    background-color: #eee1;
+}
+
+.cart-header{
+    min-height: 100vh;
+    width: 100%;
+    background-image: linear-gradient(rgba(4, 9, 30, 0.7), rgba(4, 9, 30, 0.7)),url(image/banner.png);
+    background-position: center;
+    background-size: cover;
+    text-align: center;
+    color: #fff;
+}
+
+.cart-header h1{
+    margin-top: 100px;
+}
+.login-item span{
+    display: flex;
+    width: 17px;
+    height: 17px;
+    background-color: red;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    color: #fff;
+    border-radius: 50%;
+    top: 22px;
+    right: 9px;
+    font-size: 15px;
+}

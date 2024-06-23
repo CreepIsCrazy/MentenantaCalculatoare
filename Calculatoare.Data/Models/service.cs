@@ -15,6 +15,8 @@ public partial class service
 
     public double Price { get; set; }
 
+    public string ImageFileName { get; set; } = "";
+
     public bool IsActive { get; set; }
 
     public virtual ICollection<order_service> order_service { get; set; } = new List<order_service>();

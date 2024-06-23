@@ -1,0 +1,219 @@
+﻿@layout EmptyLayout
+@page "/"
+@using Calculatoare.Shared.Authentication.DTOs
+@inject HttpClient Http
+
+@using Calculatoare.Shared.Order
+@inject ILocalStorageService LocalStorage
+
+<PageTitle>Acasa</PageTitle>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="with=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <div class="background">
+        <section class="header">
+            <div class="login">
+                <a href="/register" class="login-item" style="margin-left: auto;"><i class="fa fa-user-o"></i></a>
+                <div class="login-item">
+                    <a href="/cart" <i class="fa fa-shopping-cart"></i> </a>
+                    <span>@(Cart?.NumberOfItems ?? 0)</span>
+                </div>
+            </div>
+            <nav>
+                <a href="/"><img src="image/logo.png"></a>
+                <div class="nav-links" id="navLinks">
+                    <i class="fa fa-times-circle" onclick="hideMenu()"></i>
+                    <div class="login">
+                        <a href="/login" class="login-item" style="margin-left: auto;"><i class="fa fa-user-o"></i></a>
+                        <div class="login-item">
+                            <i class="fa fa-shopping-cart"></i>
+                        </div>
+                    </div>
+                    <ul>
+                        <li><a href="/">ACASA</a></li>
+                        <li><a href="/desprenoi">DESPRE NOI</a></li>
+                        <li><a href="/servicii">SERVICII</a></li>
+                        <li><a href="/keycaps">KEYCAPS</a></li>
+                        <li><a href="#recenzii">RECENZII</a></li>
+                        <li><a href="/contact">CONTACT</a></li>
+                    </ul>
+                </div>
+                <i class="fa fa-bars" onclick="showMenu()"></i>
+
+            </nav>
+            <div class="text-box">
+                <h1>Bine ai venit pe site-ul nostru!</h1>
+                <p>Aici veți găsi diverse servicii pentru mentenanța <br>unitatei sau a laptop-urilor!</p>
+                <a href="/servicii" class="hero-btn">Apăsați aici pentru a consulta lista noastră de servicii!</a>
+            </div>
+        </section>
+<!------------- descriere servicii ----------->
+<section class="servicii">
+    <h1>Servicii și soluții IT</h1>
+    <p>Accelerăm performanța calculatorului tău oferind servicii de mentenanță</p>
+    <div class="row">
+        <div class="servicii-col">
+            <h3>Servicii IT mobile</h3>
+            <p>Vă punem la dispoziție servicii IT pentru acasă <br> Venim la dumneavoastră pentru a vă oferi sprijin de specialitate și consiliere pentru orice problemă din domeniul IT.</p>
+        </div>
+        <div class="servicii-col">
+            <h3>Ridicare echipament</h3>
+            <p>Putem ridica echipamentul dumneavoastră direct de la serviciu, acasă sau orice altă locație și să-l returnăm după reparație.</p>
+        </div>
+        <div class="servicii-col">
+            <h3>Asistență Online de la distanță</h3>
+            <p>Suportul nostru IT vă vine în ajutor și gata pregătit cu o mulțime de probleme rezolvate de la distanță, fie prin telefon, e-mail sau monitorizare de la distanță cu asistență.</p>
+        </div>
+    </div>
+    <div class="da"></div>
+</section>
+
+<!----------- curatare praf ---------->
+
+<section class="curatare">
+    <h1>Curatare Unitate/Laptop</h1>
+
+    <div class="row">
+        <div class="curatare-col">
+            <img src="image/unitate.png">
+            <div class="layer">
+                <h3>Curățare praf unitate</h3>
+            </div>
+        </div>
+        <div class="curatare-col">
+            <img src="image/laptop.png">
+            <div class="layer">
+                <h3>Curățare praf laptop</h3>
+            </div>
+        </div>
+        <div class="curatare-col">
+            <img src="image/pasta.png">
+            <div class="layer">
+                <h3>Aplicare pastă termică</h3>
+            </div>
+        </div>
+    </div>
+    <a href="/servicii" class="hero-btn red-btn">Apasați aici pentru lista noastră de servicii.</a>
+
+</section>
+
+
+<!-------Iesirea in evidenta------->
+
+<section class="evidenta">
+    <h1>Descoperă ce ne face să ieșim în<br>evidență printre opțiunile tale.</h1>
+
+    <div class="row">
+        <div class="evidenta-col">
+            <img src="image/transport.png">
+            <h3>Livrare la domiciliu</h3>
+            <p>Livrare oriunde în București sau județul Ilfov.</p>
+        </div>
+        <div class="evidenta-col">
+            <img src="image/cadou.png">
+            <h3>Transport Gratuit</h3>
+            <p>Pentru comenzile ce depasesc suma de 199 RON.</p>
+        </div>
+        <div class="evidenta-col">
+            <img src="image/rapid.png">
+            <h3>Livrare rapidă</h3>
+            <p>Livrările se fac în 1-3 zile lucrătoare de la data primirii.</p>
+        </div>
+        <div class="evidenta-col">
+            <img src="image/support.png">
+            <h3>Asistență și suport</h3>
+            <p>De Luni până vineri între orele 10:00 - 16:00.</p>
+        </div>
+    </div>
+    <div class="da"></div>
+</section>
+
+<!---------Recenzii------->
+
+<section id="recenzii" class="recenzii">
+    <h1>Recenzii</h1>
+
+    <div class="row">
+        <div class="recenzii-col">
+            <img src="image/user1.png">
+            <div>
+                <p>Sunt mulțumit de servicii și promptitudine. Am avut o mică nelămurire, dar s-a remediat printr-un scurt apel.</p>
+                <h3>Nicolae Pablo</h3>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star-o"></i>
+            </div>
+        </div>
+        <div class="recenzii-col">
+            <img src="image/user2.png">
+            <div>
+                <p>Servicii de calitate, eu mulțumit.</p>
+                <h3>Tienghi Andrei</h3>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star-half-o"></i>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-------Contactare------->
+
+<section class="cta">
+    <h1>Pentru mai multe informații.</h1>
+    <a href="/contact" class="hero-btn">Contactaține aici.</a>
+</section>
+
+ <!-------Detalii------->
+<section class="detalii">
+    <h4>Contact</h4>
+        <p>Adresa: Strada Dâmbovnicului Tineretului <br>Localitate: București <br>Cod Postal: 040441 <br>Email: lulutech@gmail.com <br>Telefon: 0712345678 </p>
+        <p>© de Sarraj Omar</p>
+</section>
+            <!-------JavaScript pentru deschidere meniuri pe telefon------->
+
+            <script>
+
+                var navLinks = document.getElementById("navLinks")
+
+                function showMenu() {
+                    navLinks.style.right = "0";
+                }
+                function hideMenu() {
+                    navLinks.style.right = "-200px";
+                }
+
+            </script>
+    </div>
+</body>
+</html>
+
+
+@code {
+    public Calculatoare.Shared.Order.Cart Cart { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await Initialize();
+    }
+
+    private async Task Initialize()
+    {
+        Cart = await LocalStorage.GetItemAsync<Calculatoare.Shared.Order.Cart>("cart");
+        StateHasChanged();
+    }
+}

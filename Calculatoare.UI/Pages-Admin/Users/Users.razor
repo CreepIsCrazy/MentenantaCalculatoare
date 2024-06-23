@@ -1,0 +1,55 @@
+﻿@page "/users"
+@using Calculatoare.Data.Models
+@using Calculatoare.Shared
+@inject HttpClient Http
+
+<h3>Users page</h3>
+<button @onclick="GetUsers">Refresh users</button>
+
+@if (IsBusy)
+{
+    <h1>Page loading.....</h1>
+}
+else
+{
+    if (UsersList is null || UsersList.Count == 0)
+    {
+        <h1>No users</h1>
+    }
+    else
+    {
+        foreach (var user in UsersList)
+        {
+            <h1>@user.Username</h1>
+        }
+    }
+}
+
+@code {
+    private bool IsBusy = false;
+    private ObservableCollection<user> UsersList = [];
+
+    protected override async Task OnInitializedAsync()
+    {
+        await GetUsers();
+
+        await base.OnInitializedAsync();
+    }
+
+    private async Task GetUsers()
+    {
+        IsBusy = true;
+
+        UsersList.Clear();
+        var result = await Http.GetAsync("User");
+        var content = await result.Content.ReadAsStringAsync();
+
+        var users = JsonConvert.DeserializeObject<ServiceResponse<List<user>>>(content);
+        if (users is not null || users.Data.Count > 0)
+            foreach (var user in users.Data)
+                UsersList.Add(user);
+
+        IsBusy = false;
+        StateHasChanged();
+    }
+}

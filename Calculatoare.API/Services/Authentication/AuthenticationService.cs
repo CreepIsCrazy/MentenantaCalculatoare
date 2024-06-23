@@ -129,12 +129,12 @@ public class AuthenticationService : IAuthenticationService
 
     private string CreateToken(user user)
     {
-        List<Claim> claims = new List<Claim>
-        {
-            new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-            new Claim(ClaimTypes.Name, user.Username),
-            new Claim(ClaimTypes.Role, user.TypeId.ToString()),
-        };
+        List<Claim> claims =
+        [
+            new (ClaimTypes.NameIdentifier, user.Id.ToString()),
+            new (ClaimTypes.Name, user.Username),
+            new (ClaimTypes.Role, user.TypeId.ToString()),
+        ];
 
         var key = new SymmetricSecurityKey(
             Encoding.UTF8.GetBytes(_configuration.GetSection("AppSettings:JWTToken").Value));

@@ -1,0 +1,139 @@
+﻿@layout EmptyLayout
+@page "/register"
+@using Calculatoare.Shared.Authentication.DTOs
+@using Calculatoare.Shared.Order
+@inject AuthenticationStateProvider AuthStateProvider
+@inject ILocalStorageService LocalStorage
+@inject HttpClient Http
+@inject NavigationManager _nav
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="with=device-width, initial-scale=1.0">
+    <title>Lulutech</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <div class="background">
+        <section class="header">
+            <div class="login">
+                <a href="/login" class="login-item" style="margin-left: auto;"><i class="fa fa-user-o"></i></a>
+                <div class="login-item">
+                    <i class="fa fa-shopping-cart"></i>
+                    <span>@(Cart?.NumberOfItems ?? 0)</span>
+                </div>
+            </div>
+            <nav>
+                <a href="site.html"><img src="image/logo.png"></a>
+                <div class="nav-links" id="navLinks">
+                    <i class="fa fa-times-circle" onclick="hideMenu()"></i>
+                    <div class="login">
+                        <a href="/login" class="login-item" style="margin-left: auto;"><i class="fa fa-user-o"></i></a>
+                        <div class="login-item">
+                            <i class="fa fa-shopping-cart"></i>
+                        </div>
+                    </div>
+                    <ul>
+                        <li><a href="/">ACASA</a></li>
+                        <li><a href="/desprenoi">DESPRE NOI</a></li>
+                        <li><a href="/servicii">SERVICII</a></li>
+                        <li><a href="/keycaps">KEYCAPS</a></li>
+                        <li><a href="#recenzii">RECENZII</a></li>
+                        <li><a href="/contact">CONTACT</a></li>
+                    </ul>
+                </div>
+                <i class="fa fa-bars" onclick="showMenu()"></i>
+
+            </nav>
+            <div class="register">
+                <div class="container">
+                    <form action="" method="post">
+                        <h2>Înregistrare</h2>
+                        <div class="content">
+                            <div class="input-box">
+                                <label for="name">Username</label>
+                                <input type="text" placeholder="Adăugați un username" name="Username" required>
+                            </div>
+                            <div class="input-box">
+                                <label for="name">Parola</label>
+                                <input type="text" placeholder="Parola" name="Password" required>
+                            </div>
+                            <div class="input-box">
+                                <label for="name">Email</label>
+                                <input type="text" placeholder="Adresa de Email" name="Email" required>
+                            </div>
+                            <div class="input-box">
+                                <label for="name">Nume</label>
+                                <input type="text" placeholder="Nume" name="Lastname" required>
+                            </div>
+                            <div class="input-box">
+                                <label for="name">Prenume</label>
+                                <input type="text" placeholder="Prenume" name="Firstname" required>
+                            </div>
+                            <div class="input-box">
+                                <label for="name">Telefon</label>
+                                <input type="text" placeholder="Telefon" name="Phone" required>
+                            </div>
+                            <div class="input-box">
+                                <label for="name">Adresa</label>
+                                <input type="text" placeholder="Adresa" name="Adress" required>
+                            </div>
+                            <div class="input-box">
+                                <label for="name">Orasul</label>
+                                <input type="text" placeholder="Orașul" name="City" required>
+                            </div>
+                            <div class="input-box">
+                                <label for="name">Localitatea</label>
+                                <input type="text" placeholder="Localitatea" name="Country" required>
+                            </div>
+                            <div class="input-box">
+                                <label for="name">Cod Postal</label>
+                                <input type="text" placeholder="Cod Poștal" name="ZipCode" required>
+                            </div>
+                        </div>
+                        <div class="button-container">
+                            <button type="submit">Register</button>
+                            <p>Aveți deja cont? <a href="/login">Logațivă aici</a>!</p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-------JavaScript pentru deschidere meniuri pe telefon------->
+
+        <script>
+
+            var navLinks = document.getElementById("navLinks")
+
+            function showMenu() {
+                navLinks.style.right = "0";
+            }
+            function hideMenu() {
+                navLinks.style.right = "-200px";
+            }
+
+        </script>
+    </div>
+</body>
+</html>
+
+@code {
+    public Calculatoare.Shared.Order.Cart Cart { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await Initialize();
+    }
+
+    private async Task Initialize()
+    {
+        Cart = await LocalStorage.GetItemAsync<Calculatoare.Shared.Order.Cart>("cart");
+        StateHasChanged();
+    }
+}

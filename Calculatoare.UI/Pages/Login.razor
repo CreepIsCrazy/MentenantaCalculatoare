@@ -1,0 +1,131 @@
+﻿@page "/login"
+@layout EmptyLayout
+
+@using Calculatoare.Shared.Authentication.DTOs
+@inject AuthenticationStateProvider AuthStateProvider
+@inject ILocalStorageService LocalStorage
+@inject HttpClient Http
+@inject NavigationManager _nav
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="with=device-width, initial-scale=1.0">
+    <title>Lulutech</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <div class="background">
+        <section class="header">
+            <div class="login">
+                <i class="fa fa-user-o"></i>
+                <div class="cart">
+                    <i class="fa fa-shopping-cart"></i>
+                    <span>@(Cart?.NumberOfItems ?? 0)</span>
+                </div>
+            </div>
+            <nav>
+                <a href="site.html"><img src="image/logo.png"></a>
+                <div class="nav-links" id="navLinks">
+                    <i class="fa fa-times-circle" onclick="hideMenu()"></i>
+                    <div class="login">
+                        <a href="/login" class="login-item" style="margin-left: auto;"><i class="fa fa-user-o"></i></a>
+                        <div class="login-item">
+                            <i class="fa fa-shopping-cart"></i>
+                        </div>
+                    </div>
+                    <ul>
+                        <li><a href="/">ACASA</a></li>
+                        <li><a href="/desprenoi">DESPRE NOI</a></li>
+                        <li><a href="/servicii">SERVICII</a></li>
+                        <li><a href="/keycaps">KEYCAPS</a></li>
+                        <li><a href="#recenzii">RECENZII</a></li>
+                        <li><a href="/contact">CONTACT</a></li>
+                    </ul>
+                </div>
+                <i class="fa fa-bars" onclick="showMenu()"></i>
+
+            </nav>
+            <div class="register">
+                <div class="container">
+                    <EditForm Model="user" OnSubmit="HandleLogin">
+                        <h2>Logare</h2>
+                        <div class="content">
+                            <div class="input-box">
+                                <label for="username">Username</label>
+                                <InputText id="username" @bind-Value="user.Username" />
+                            </div>
+                            <div class="input-box">
+                                <label for="password">Parola</label>
+                                <InputText id="password" @bind-Value="user.Password" type="password" />
+                            </div>
+                        </div>
+                        <div class="button-container">
+                            <button type="submit">Login</button>
+                            <p>Nu aveți cont? Înregistrațivă <a href="register.html">aici</a>!</p>
+                        </div>
+                    </EditForm>
+                </div>
+            </div>
+        </section>
+
+        <!-------JavaScript pentru deschidere meniuri pe telefon------->
+
+        <script>
+
+            var navLinks = document.getElementById("navLinks")
+
+            function showMenu() {
+                navLinks.style.right = "0";
+            }
+            function hideMenu() {
+                navLinks.style.right = "-200px";
+            }
+
+        </script>
+    </div>
+</body>
+</html>
+
+@code {
+    LoginDTO user = new LoginDTO();
+
+    public Calculatoare.Shared.Order.Cart Cart { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await Initialize();
+    }
+
+    private async Task Initialize()
+    {
+        Cart = await LocalStorage.GetItemAsync<Calculatoare.Shared.Order.Cart>("cart");
+        StateHasChanged();
+    }
+
+    async Task HandleLogin()
+    {
+        var result = await Http.PostAsJsonAsync("Authentication/login", user);
+        var token = await result.Content.ReadAsStringAsync();
+        //Console.WriteLine(token);
+        await LocalStorage.SetItemAsync("token", token);
+        var state = await AuthStateProvider.GetAuthenticationStateAsync();
+        if (state is not null)
+        {
+            foreach (var item in state.User.Claims)
+            {
+                Console.WriteLine($"{item.Type}, {item.Value}");
+            }
+            var roleClaim = state.User.Claims.FirstOrDefault(x => x.Type == System.Security.Claims.ClaimTypes.Role);
+            if (roleClaim is not null &&
+                int.TryParse(roleClaim.Value, out int roleId) &&
+                roleId == 1)
+                _nav.NavigateTo("/dashboard");
+        }
+    }
+}

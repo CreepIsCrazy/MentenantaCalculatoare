@@ -1,0 +1,86 @@
+[
+    {
+        "id": 1,
+        "name": "Curățare generală unitate",
+        "price": 100,
+        "image": "image/unitate.png",
+    },
+    {
+        "id": 2,
+        "name": "Curățare generală laptop",
+        "price": 100,
+        "image": "image/laptop.png",
+    },
+    {
+        "id": 3,
+        "name": "Aplicare pastă termoconductoare pentru procesor",
+        "price": 50,
+        "image": "image/pasta.png",
+    },
+    {
+        "id": 4,
+        "name": "Aplicare pastă termoconductoare pentru placa video",
+        "price": 50,
+        "image": "image/pastaplaca.jpg",
+    },
+    {
+        "id": 5,
+        "name": "Înlocuire carcasă PC",
+        "price": 198,
+        "image": "image/inlocuire.png",
+    },
+    {
+        "id": 6,
+        "name": "Recondiționare carcasă și elemente deteriorate de laptop",
+        "price": 198,
+        "image": "image/reconditionare1.jpg",
+    },
+    {
+        "id": 7,
+        "name": "Configurare drivere si programe de bază laptop/desktop",
+        "price": 99,
+        "image": "image/driver1.png",
+    },
+    {
+        "id": 8,
+        "name": "Diagnosticare sisteme de calcul",
+        "price": 98,
+        "image": "image/diagnostic1.png",
+    },
+    {
+        "id": 9,
+        "name": "Recuperare date pentru dispozitive cu defecte logice",
+        "price": 198,
+        "image": "image/recuperare1.jpg",
+    },
+    {
+        "id": 10,
+        "name": "Clonare SSD/HDD",
+        "price": 99,
+        "image": "image/clonare1.png",
+    },
+    {
+        "id": 11,
+        "name": "Taxă de urgentare",
+        "price": 50,
+        "image": "image/taxa1.jpeg",
+    },
+    {
+        "id": 12,
+        "name": "Deparolare Windows",
+        "price": 99,
+        "image": "image/deparolare.png",
+    },
+    {
+        "id": 13,
+        "name": "Serviciu update BIOS",
+        "price": 79,
+        "image": "image/BIOS.png",
+    },
+    {
+        "id": 14,
+        "name": "Consultanță IT",
+        "price": 130,
+        "image": "image/IT.png",
+    },
+]
