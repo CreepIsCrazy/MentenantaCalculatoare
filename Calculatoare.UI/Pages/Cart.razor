@@ -6,7 +6,7 @@
 
 <html>
 <head>
-	<meta name="viewport" content="with=device-width, initial-scale=1.0">
+	<meta Title="viewport" content="with=device-width, initial-scale=1.0">
 	<title>Lulutech</title>
 	<link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -60,8 +60,8 @@
                                     <div class="image">
                                         <img src="@item.PictureURL" alt="">
                                     </div>
-                                    <div class="name">
-                                        @item.Name
+                                    <div class="Title">
+                                        @item.Title
                                     </div>
                                     <div class="price">
                                         @item.Price ron
@@ -135,7 +135,7 @@
     {
         if (item.Quantity == 1)
         {
-            bool confirmed = await JSRuntime.InvokeAsync<bool>("confirm", $"Are you sure you want to remove item\n\n{item.Name}?");
+            bool confirmed = await JSRuntime.InvokeAsync<bool>("confirm", $"Are you sure you want to remove item\n\n{item.Title}?");
             if (!confirmed)
                 return;
 

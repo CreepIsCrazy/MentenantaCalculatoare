@@ -1,0 +1,73 @@
+﻿@page "/addOrEditService/{ItemId}"
+@using Calculatoare.Shared
+@using Calculatoare.Shared.Order
+@inject HttpClient Http
+@inject NavigationManager Navigation
+
+<h3>AddOrEditService</h3>
+
+<div class="container">
+    <EditForm Model="Service" OnSubmit="AddOrEdit">
+        @if (Service.ItemId == 0)
+        {
+            <h2>Add</h2>
+        }
+        else
+        {
+            <h2>Edit</h2>
+        }
+
+        <div class="content">
+            <div class="input-box">
+                <label for="Title">Title</label>
+                <InputText id="Title" @bind-Value="Service.Title" />
+            </div>
+            <div class="input-box">
+                <label for="description">Description</label>
+                <InputText id="description" @bind-Value="Service.Description" />
+            </div>
+            <div class="input-box">
+                <label for="price">Price</label>
+                <InputNumber id="price" @bind-Value="Service.Price" />
+            </div>
+
+
+        </div>
+        <div class="button-container">
+            <button type="submit">Send</button>
+        </div>
+    </EditForm>
+</div>
+
+@code {
+    public Item Service { get; set; }
+
+    [Parameter]
+    public int ItemId { get; set; }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        if (ItemId == 0)
+            Service = new Item();
+        else
+        {
+            var result = await Http.GetAsync($"Services/{ItemId}");
+            var content = await result.Content.ReadAsStringAsync();
+
+            var service = JsonConvert.DeserializeObject<ServiceResponse<Item>>(content);
+            Service = service.Data;
+        }
+    }
+
+    async Task AddOrEdit()
+    {
+        var result = await Http.PostAsJsonAsync("Services/AddOrEditService", Service);
+        if (result.IsSuccessStatusCode)
+        {
+            var content = await result.Content.ReadAsStringAsync();
+            var services = JsonConvert.DeserializeObject<ServiceResponse<List<Item>>>(content);
+            if (services.Success)
+                Navigation.NavigateTo("/services");
+        }
+    }
+}

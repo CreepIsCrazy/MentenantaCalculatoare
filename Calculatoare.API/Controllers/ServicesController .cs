@@ -1,9 +1,6 @@
 ﻿using Calculatoare.API.Services.Servicii;
-using Calculatoare.API.Services.User;
-using Calculatoare.Data.Models;
 using Calculatoare.Shared;
-using Calculatoare.Shared.Authentication.DTOs;
-using Microsoft.AspNetCore.Authorization;
+using Calculatoare.Shared.Order;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Calculatoare.API.Controllers;
@@ -13,13 +10,17 @@ namespace Calculatoare.API.Controllers;
 public class ServicesController(IServices _services) : ControllerBase
 {
     [HttpGet]
-    public async Task<ActionResult<ServiceResponse<IEnumerable<user>>>> GetUsers() => 
-        await _userService.GetUsers();
+    public async Task<ActionResult<ServiceResponse<IEnumerable<Item>>>> GetServices() => 
+        await _services.GetServices();
 
-    [HttpPost("register")]
-    public async Task<ActionResult<ServiceResponse<int>>> RegisterUser(RegisterDTO user)
+    [HttpGet("{id}")]
+    public async Task<ActionResult<ServiceResponse<Item>>> GetService(int id) =>
+        await _services.GetService(id);
+
+    [HttpPost("AddOrEdit")]
+    public async Task<ActionResult> AddOrEditService(Item item)
     {
-        var response = await _userService.RegisterUser(user);
-        return Ok(response);
+        await _services.AddOrEditService(item);
+        return Created();
     }
 }

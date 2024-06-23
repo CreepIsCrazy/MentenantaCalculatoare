@@ -1,5 +1,68 @@
-﻿<h3>Services</h3>
+﻿@page "/services"
+@using Calculatoare.Data.Models
+@using Calculatoare.Shared
+@using Calculatoare.Shared.Order
+@inject HttpClient Http
+@inject NavigationManager Navigation
+
+<h3>Servicii</h3>
+<p>add service</p>
+<button @onclick="GetServices">Refresh services</button>
+
+@if (IsBusy)
+{
+    <h1>Page loading.....</h1>
+}
+else
+{
+    if (ServicesList is null || ServicesList.Count == 0)
+    {
+        <h1>No services</h1>
+    }
+    else
+    {
+        foreach (var service in ServicesList)
+        {
+            <div style="display: flex;">
+                <p style="margin: 0px 10px">@service.PictureURL</p>
+                <p style="margin: 0px 10px">@service.Title</p>
+                <p style="margin: 0px 10px">@service.Description</p>
+                <p style="margin: 0px 10px">@service.Price</p>
+            </div>
+        }
+    }
+}
 
 @code {
+    private bool IsBusy = false;
+    private ObservableCollection<Item> ServicesList = [];
 
+    protected override async Task OnInitializedAsync()
+    {
+        await GetServices();
+
+        await base.OnInitializedAsync();
+    }
+
+    private async Task GetServices()
+    {
+        IsBusy = true;
+
+        ServicesList.Clear();
+        var result = await Http.GetAsync("Services");
+        var content = await result.Content.ReadAsStringAsync();
+
+        var services = JsonConvert.DeserializeObject<ServiceResponse<List<Item>>>(content);
+        if (services is not null || services.Data.Count > 0)
+            foreach (var service in services.Data)
+                ServicesList.Add(service);
+
+        IsBusy = false;
+        StateHasChanged();
+    }
+
+    public void AddOrEditService(int id)
+    {
+        Navigation.NavigateTo($"/addOrEditService/{id}");
+    }
 }

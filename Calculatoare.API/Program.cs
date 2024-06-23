@@ -1,4 +1,5 @@
 using Calculatoare.API.Services.Authentication;
+using Calculatoare.API.Services.Servicii;
 using Calculatoare.API.Services.User;
 using Calculatoare.Data.Context;
 using Microsoft.AspNetCore.Authentication;
@@ -51,6 +52,7 @@ builder.Services.AddDbContext<CalculatoareContext>(options =>
 
 builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IServices, Services>();
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
