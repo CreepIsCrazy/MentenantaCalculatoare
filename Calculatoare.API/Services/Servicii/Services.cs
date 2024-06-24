@@ -44,6 +44,18 @@ public class Services(CalculatoareContext _ctx) : IServices
         };
     }
 
+    public async Task RemoveService(int id)
+    {
+        var service = await _ctx.service.AsNoTracking()
+            .FirstOrDefaultAsync(x => x.Id == id);
+
+        if (service is null)
+            throw new Exception("service not found");
+
+        _ctx.service.Remove(service);
+        await _ctx.SaveChangesAsync();
+    }
+
     public async Task AddOrEditService(Item item)
     {
         if (item.ItemId == 0)

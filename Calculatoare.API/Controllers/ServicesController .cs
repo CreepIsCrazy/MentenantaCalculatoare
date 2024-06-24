@@ -17,6 +17,13 @@ public class ServicesController(IServices _services) : ControllerBase
     public async Task<ActionResult<ServiceResponse<Item>>> GetService(int id) =>
         await _services.GetService(id);
 
+    [HttpDelete("{id}")]
+    public async Task<ActionResult> RemoveService(int id)
+    {
+        await _services.RemoveService(id);
+        return Ok();
+    }
+
     [HttpPost("AddOrEdit")]
     public async Task<ActionResult> AddOrEditService(Item item)
     {

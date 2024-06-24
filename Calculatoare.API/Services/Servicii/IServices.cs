@@ -7,4 +7,5 @@ public interface IServices
     Task AddOrEditService(Item item);
     Task<ServiceResponse<Item>> GetService(int id);
     Task<ServiceResponse<IEnumerable<Item>>> GetServices();
+    Task RemoveService(int id);
 }
