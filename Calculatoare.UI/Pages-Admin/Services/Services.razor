@@ -24,7 +24,10 @@ else
         foreach (var service in ServicesList)
         {
             <div style="display: flex; gap: 10px;">
-                <p style="margin: 0px 10px">@service.PictureURL</p>
+                @if(service.PictureURL != null)
+                {
+                    <img loading="lazy" style="width: 180px;" src="data:image;base64,@System.Convert.ToBase64String(service.PictureURL)" />
+                }
                 <p style="margin: 0px 10px">@service.Title</p>
                 <p style="margin: 0px 10px">@service.Description</p>
                 <p style="margin: 0px 10px">@service.Price</p>

@@ -1,344 +1,59 @@
 ﻿@page "/servicii"
+@using Calculatoare.Shared
 @using Calculatoare.Shared.Order
 @inject ILocalStorageService LocalStorage
-
-<SectionContent SectionTitle="page-title">Servicii</SectionContent>
+@inject HttpClient Http
 
 <PageTitle>Servicii</PageTitle>
 
-<!-------JavaScript schimbare imagini servicii------->
-
-<script>
-    function hover(element) {
-        element.setAttribute('src', 'image/unitate2.png');
-    }
-    function unhover(element) {
-        element.setAttribute('src', 'image/unitate.png');
-    }
-    function hover1(element) {
-        element.setAttribute('src', 'image/laptop1.jpg');
-    }
-    function unhover1(element) {
-        element.setAttribute('src', 'image/laptop.png');
-    }
-    function hover2(element) {
-        element.setAttribute('src', 'image/pasta1.jpg');
-    }
-    function unhover2(element) {
-        element.setAttribute('src', 'image/pasta.png');
-    }
-    function hover3(element) {
-        element.setAttribute('src', 'image/pastaplaca1.png');
-    }
-    function unhover3(element) {
-        element.setAttribute('src', 'image/pastaplaca.jpg');
-    }
-    function hover4(element) {
-        element.setAttribute('src', 'image/inlocuire1.jpg');
-    }
-    function unhover4(element) {
-        element.setAttribute('src', 'image/inlocuire.png');
-    }
-    function hover5(element) {
-        element.setAttribute('src', 'image/reconditionare.jpg');
-    }
-    function unhover5(element) {
-        element.setAttribute('src', 'image/reconditionare1.jpg');
-    }
-    function hover6(element) {
-        element.setAttribute('src', 'image/driver.png');
-    }
-    function unhover6(element) {
-        element.setAttribute('src', 'image/driver1.png');
-    }
-    function hover7(element) {
-        element.setAttribute('src', 'image/diagnostic.jpg');
-    }
-    function unhover7(element) {
-        element.setAttribute('src', 'image/diagnostic1.png');
-    }
-    function hover8(element) {
-        element.setAttribute('src', 'image/recuperare.jpg');
-    }
-    function unhover8(element) {
-        element.setAttribute('src', 'image/recuperare1.jpg');
-    }
-    function hover9(element) {
-        element.setAttribute('src', 'image/clonare.png');
-    }
-    function unhover9(element) {
-        element.setAttribute('src', 'image/clonare1.png');
-    }
-    function hover10(element) {
-        element.setAttribute('src', 'image/taxa.png');
-    }
-    function unhover10(element) {
-        element.setAttribute('src', 'image/taxa1.jpeg');
-    }
-    function hover11(element) {
-        element.setAttribute('src', 'image/deparolare1.png');
-    }
-    function unhover11(element) {
-        element.setAttribute('src', 'image/deparolare.png');
-    }
-    function hover12(element) {
-        element.setAttribute('src', 'image/BIOS1.jpg');
-    }
-    function unhover12(element) {
-        element.setAttribute('src', 'image/BIOS.png');
-    }
-    function hover13(element) {
-        element.setAttribute('src', 'image/IT2.jpg');
-    }
-    function unhover13(element) {
-        element.setAttribute('src', 'image/IT.png');
-    }
-</script>
-
 <!-------Despre noi continut------->
 <section class="border">
-
-    <!-------Randul 1------->
-
-    <div class="row line">
-        <div class="border-col">
-            <div class="cutie">
-                <img src="image/unitate.png " onmouseover="hover(this);" onmouseout="unhover(this);">
+    @if (IsBusy)
+    {
+        <h1>@ResultMessage</h1>
+    }
+    else
+    {
+        if (ServicesList is null || ServicesList.Count == 0)
+        {
+            <h1>@ResultMessage</h1>
+        }
+        else
+        {
+            <div style="display: flex; flex-wrap: wrap; gap: 10px; margin: 0px 10px; justify-content: center;">
+                <Virtualize Items="ServicesList" Context="service">
+                    <div style="width: 190px">
+                        <div class="border-col">
+                            <div class="cutie">
+                                @if (service.PictureURL != null)
+                                {
+                                    <img loading="lazy" style="width: 180px; margin: auto;" src="data:image;base64,@System.Convert.ToBase64String(service.PictureURL)" />
+                                }
+                            </div>
+                            <h4>@service.Title <br>  <br> </h4>
+                            <p>@service.Description</p>
+                            <h3>@service.Price RON</h3>
+                            <button class="hero-btn hero-btnn red-btn" @onclick=@(async () => await AddItemToCart(service))>
+                                Adaugă în coș.
+                            </button>
+                        </div>
+                        <hr width="1" size="160" style="0 auto" />
+                    </div>
+                </Virtualize>
             </div>
-            <h4>Curățare generală unitate <br>  <br> </h4>
-            <h3>100 RON</h3>
-            <button class="hero-btn hero-btnn red-btn" @onclick=@(async () => await AddItemToCart(new Item{
-                    Title = "Curățare generală unitate",
-                    Price = 100,
-                    Quantity = 1,
-                    PictureURL = "image/unitate.png"
-            }))>Adaugă în coș.</button>
-        </div>
-        <hr width="1" size="160" style="0 auto" />
-        <div class="border-col">
-            <div class="cutie">
-                <img src="image/laptop.png" onmouseover="hover1(this);" onmouseout="unhover1(this);">
-            </div>
-            <h4>Curățare generală laptop <br> <br> </h4>
-            <h3>100 RON</h3>
-            <button class="hero-btn hero-btnn red-btn" @onclick=@(async () => await AddItemToCart(new Item{
-                    Title = "Curățare generală laptop",
-                    Price = 100,
-                    Quantity = 1,
-                    PictureURL = "image/laptop.png"
-            }))>
-                Adaugă în coș.
-            </button>
-        </div>
-        <hr width="1" size="160" style="0 auto" />
-        <div class="border-col">
-            <div class="cutie">
-                <img src="image/pasta.png" onmouseover="hover2(this);" onmouseout="unhover2(this);">
-            </div>
-            <h4>Aplicare pastă termoconductoare pentru procesor</h4>
-            <h3>50 RON</h3>
-            <button class="hero-btn hero-btnn red-btn" @onclick=@(async () => await AddItemToCart(new Item{
-                    Title = "Aplicare pastă termoconductoare pentru procesor",
-                    Price = 50,
-                    Quantity = 1,
-                    PictureURL = "image/pasta.png"
-                    }))>
-                >Adaugă în coș.
-            </button>
-        </div>
-        <hr width="1" size="160" style="0 auto" />
-        <div class="border-col">
-            <div class="cutie">
-                <img src="image/pastaplaca.jpg" onmouseover="hover3(this);" onmouseout="unhover3(this);">
-            </div>
-            <h4>Aplicare pastă termoconductoare pentru placa video</h4>
-            <h3>50 RON</h3>
-            <button class="hero-btn hero-btnn red-btn" @onclick=@(async () => await AddItemToCart(new Item{
-                    Title = "Aplicare pastă termoconductoare pentru placa video",
-                    Price = 50,
-                    Quantity = 1,
-                    PictureURL = "image/pastaplaca.jpg"
-                    }))>
-                >Adaugă în coș.
-            </button>
-        </div>
-        <hr width="1" size="160" style="0 auto" />
-        <div class="border-col">
-            <div class="cutie">
-                <img src="image/inlocuire.png" onmouseover="hover4(this);" onmouseout="unhover4(this);">
-            </div>
-            <h4>Înlocuire carcasă PC <br> <br> <br> </h4>
-            <h3>198 RON</h3>
-            <button class="hero-btn hero-btnn red-btn" @onclick=@(async () => await AddItemToCart(new Item{
-                    Title = "Înlocuire carcasă PC",
-                    Price = 198,
-                    Quantity = 1,
-                    PictureURL = "image/inlocuire.png"
-                    }))>
-                >Adaugă în coș.
-            </button>
-        </div>
-    </div>
-    <div class="da"></div>
-
-    <!-------Randul 2------->
-
-    <div class="row line">
-        <div class="border-col">
-            <div class="cutie">
-                <img src="image/reconditionare1.jpg" onmouseover="hover5(this);" onmouseout="unhover5(this);">
-            </div>
-            <h4>Recondiționare carcasă și elemente deteriorate de laptop</h4>
-            <h3>198 RON</h3>
-            <button class="hero-btn hero-btnn red-btn" @onclick=@(async () => await AddItemToCart(new Item{
-                    Title = "Recondiționare carcasă și elemente deteriorate de laptop",
-                    Price = 198,
-                    Quantity = 1,
-                    PictureURL = "image/reconditionare1.jpg"
-                    }))>
-                >Adaugă în coș.
-            </button>
-        </div>
-        <hr width="1" size="160" style="0 auto" />
-        <div class="border-col">
-            <div class="cutie">
-                <img src="image/driver1.png" onmouseover="hover6(this);" onmouseout="unhover6(this);">
-            </div>
-            <h4>Configurare drivere si programe de bază laptop/desktop</h4>
-            <h3>99 RON</h3>
-            <button class="hero-btn hero-btnn red-btn" @onclick=@(async () => await AddItemToCart(new Item{
-                    Title = "Configurare drivere si programe de bază laptop/desktop",
-                    Price = 99,
-                    Quantity = 1,
-                    PictureURL = "image/driver1.png"
-                    }))>
-                >Adaugă în coș.
-            </button>
-        </div>
-        <hr width="1" size="160" style="0 auto" />
-        <div class="border-col">
-            <div class="cutie">
-                <img src="image/diagnostic1.png" onmouseover="hover7(this);" onmouseout="unhover7(this);">
-            </div>
-            <h4>Diagnosticare sisteme de calcul<br> <br> </h4>
-            <h3>98 RON</h3>
-            <button class="hero-btn hero-btnn red-btn" @onclick=@(async () => await AddItemToCart(new Item{
-                    Title = "Diagnosticare sisteme de calcul",
-                    Price = 98,
-                    Quantity = 1,
-                    PictureURL = "image/diagnostic1.png"
-                    }))>
-                >Adaugă în coș.
-            </button>
-        </div>
-        <hr width="1" size="160" style="0 auto" />
-        <div class="border-col">
-            <div class="cutie">
-                <img src="image/recuperare1.jpg" onmouseover="hover8(this);" onmouseout="unhover8(this);">
-            </div>
-            <h4>Recuperare date pentru dispozitive cu defecte logice</h4>
-            <h3>198 RON</h3>
-            <button class="hero-btn hero-btnn red-btn" @onclick=@(async () => await AddItemToCart(new Item{
-                    Title = "Recuperare date pentru dispozitive cu defecte logice",
-                    Price = 198,
-                    Quantity = 1,
-                    PictureURL = "image/recuperare1.jpg"
-                    }))>
-                >Adaugă în coș.
-            </button>
-        </div>
-        <hr width="1" size="160" style="0 auto" />
-        <div class="border-col">
-            <div class="cutie">
-                <img src="image/clonare1.png" onmouseover="hover9(this);" onmouseout="unhover9(this);">
-            </div>
-            <h4>Clonare SSD/HDD<br> <br> <br> </h4>
-            <h3>99 RON</h3>
-            <button class="hero-btn hero-btnn red-btn" @onclick=@(async () => await AddItemToCart(new Item{
-                    Title = "Clonare SSD/HDD",
-                    Price = 99,
-                    Quantity = 1,
-                    PictureURL = "image/clonare1.png"
-                    }))>
-                >Adaugă în coș.
-            </button>
-        </div>
-    </div>
-    <div class="da"></div>
-
-    <!-------Randul 3------->
-
-    <div class="row line">
-        <div class="border-col">
-            <div class="cutie">
-                <img src="image/taxa1.jpeg" onmouseover="hover10(this);" onmouseout="unhover10(this);">
-            </div>
-            <h4>Taxă de urgentare</h4>
-            <h3>50 RON</h3>
-            <button class="hero-btn hero-btnn red-btn" @onclick=@(async () => await AddItemToCart(new Item{
-                    Title = "Taxă de urgentare",
-                    Price = 99,
-                    Quantity = 1,
-                    PictureURL = "image/taxa1.jpeg"
-                    }))>
-                >Adaugă în coș.
-            </button>
-        </div>
-        <hr width="1" size="160" style="0 auto" />
-        <div class="border-col">
-            <div class="cutie">
-                <img src="image/deparolare.png" onmouseover="hover11(this);" onmouseout="unhover11(this);">
-            </div>
-            <h4>Deparolare Windows</h4>
-            <h3>99 RON</h3>
-            <button class="hero-btn hero-btnn red-btn" @onclick=@(async () => await AddItemToCart(new Item{
-                    Title = "Deparolare Windows",
-                    Price = 99,
-                    Quantity = 1,
-                    PictureURL = "image/deparolare.png"
-                    }))>
-                >Adaugă în coș.
-            </button>
-        </div>
-        <hr width="1" size="160" style="0 auto" />
-        <div class="border-col">
-            <div class="cutie">
-                <img src="image/BIOS.png" onmouseover="hover12(this);" onmouseout="unhover12(this);">
-            </div>
-            <h4>Serviciu update BIOS</h4>
-            <h3>79 RON</h3>
-            <button class="hero-btn hero-btnn red-btn" @onclick=@(async () => await AddItemToCart(new Item{
-                    Title = "Serviciu update BIOS",
-                    Price = 79,
-                    Quantity = 1,
-                    PictureURL = "image/BIOS.png"
-                    }))>
-                >Adaugă în coș.
-            </button>
-        </div>
-        <hr width="1" size="160" style="0 auto" />
-        <div class="border-col">
-            <div class="cutie">
-                <img src="image/IT.png" onmouseover="hover13(this);" onmouseout="unhover13(this);">
-            </div>
-            <h4>Consultanță IT</h4>
-            <h3>130 RON</h3>
-            <button class="hero-btn hero-btnn red-btn" @onclick=@(async () => await AddItemToCart(new Item{
-                    Title = "Consultanță IT",
-                    Price = 130,
-                    Quantity = 1,
-                    PictureURL = "image/IT.png"
-                    }))>
-                >Adaugă în coș.
-            </button>
-        </div>
-    </div>
+        }
+    }
+    
     <div class="da"></div>
 </section>
 <script src="app.js"></script>
 
 @code {
     public Calculatoare.Shared.Order.Cart _Cart { get; set; }
+    private ObservableCollection<Item> ServicesList = [];
+    private bool IsBusy = false;
+
+    private string ResultMessage = "Loading ...";
 
     protected override async Task OnInitializedAsync()
     {
@@ -348,6 +63,35 @@
     private async Task Initialize()
     {
         _Cart = await LocalStorage.GetItemAsync<Calculatoare.Shared.Order.Cart>("cart");
+
+        await GetServices();
+
+        StateHasChanged();
+    }
+
+    private async Task GetServices()
+    {
+        IsBusy = true;
+
+        ResultMessage = "Loading ...";
+
+        ServicesList.Clear();
+        var result = await Http.GetAsync("Services");
+        var content = await result.Content.ReadAsStringAsync();
+
+        var services = JsonConvert.DeserializeObject<ServiceResponse<List<Item>>>(content);
+        if (!services.Success)
+        {
+            ResultMessage = "Failed to get services";
+            IsBusy = false;
+            return;
+        }
+
+        if (services is not null || services.Data.Count > 0)
+            foreach (var service in services.Data)
+                ServicesList.Add(service);
+
+        IsBusy = false;
         StateHasChanged();
     }
 
@@ -356,9 +100,18 @@
         if (_Cart is null)
             _Cart = new();
 
-        var cartItem = _Cart.Items.FirstOrDefault(x => x.ItemId == item.ItemId);
+        var itemtoAdd = new Item
+            {
+                ItemId = item.ItemId,
+                Title = item.Title,
+                Description = item.Description,
+                Price = item.Price,
+                Quantity = 1
+            };
+
+        var cartItem = _Cart.Items.FirstOrDefault(x => x.ItemId == itemtoAdd.ItemId);
         if (cartItem is null)
-            _Cart.Items.Add(item);
+            _Cart.Items.Add(itemtoAdd);
         else cartItem.Quantity++;
 
         await LocalStorage.SetItemAsync("cart", _Cart);

@@ -63,7 +63,8 @@ public class Services(CalculatoareContext _ctx) : IServices
             {
                 Title = item.Title,
                 Description = item.Description,
-                Price = item.Price
+                Price = item.Price,
+                PictureURL = item.PictureURL
             });
         else
         {
@@ -73,6 +74,7 @@ public class Services(CalculatoareContext _ctx) : IServices
                 service.Title = item.Title;
                 service.Description = item.Description;
                 service.Price = item.Price;
+                service.PictureURL = item.PictureURL;
             }
         }
 

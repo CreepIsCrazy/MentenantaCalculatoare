@@ -755,3 +755,94 @@ contact-col div{
     right: 9px;
     font-size: 15px;
 }
+/*------- Checkout -------*/
+
+.containere {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 25px;
+    min-height: 100vh;
+    padding-bottom: 70px;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    outline: none;
+    border: none;
+    text-transform: capitalize;
+    transition: all .2s linear;
+}
+
+    .containere form {
+        padding: 20px;
+        width: 700px;
+        background: #fff;
+        box-shadow: 0 5px 10px rgba(0,0,0,.1);
+    }
+
+        .containere form .coloana {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+.containere form .coloana .cole {
+    flex: 1 1 250px;
+}
+
+    .containere form .coloana .cole .title {
+        font-size: 20px;
+        color: #333;
+        padding-bottom: 5px;
+        text-transform: uppercase;
+    }
+
+    .containere form .coloana .cole .inputBox {
+        margin: 15px 0;
+    }
+
+        .containere form .coloana .cole .inputBox span {
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .containere form .coloana .cole .inputBox input {
+            width: 100%;
+            border: 1px solid #ccc;
+            padding: 10px 15px;
+            font-size: 15px;
+            text-transform: none;
+        }
+
+            .containere form .coloana .cole .inputBox input:focus {
+                border: 1px solid #000;
+            }
+
+    .containere form .coloana .cole .flex {
+        display: flex;
+        gap: 15px;
+    }
+
+        .containere form .coloana .cole .flex .inputBox {
+            margin-top: 5px;
+        }
+
+    .containere form .coloana .cole .inputBox img {
+        height: 34px;
+        margin-top: 5px;
+        filter: drop-shadow(0 0 1px #000);
+    }
+
+.containere form .submit-btn {
+    width: 100%;
+    padding: 12px;
+    font-size: 17px;
+    background: #27ae60;
+    color: #fff;
+    margin-top: 5px;
+    cursor: pointer;
+}
+
+    .containere form .submit-btn:hover {
+        background: #2ecc71;
+    }

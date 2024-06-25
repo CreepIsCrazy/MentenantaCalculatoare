@@ -3,6 +3,7 @@
 @layout EmptyLayout
 @inject ILocalStorageService LocalStorage
 @inject IJSRuntime JSRuntime
+@inject NavigationManager _nav
 
 <html>
 <head>
@@ -58,7 +59,10 @@
                             {
                                 <div class="item">
                                     <div class="image">
-                                        <img src="@item.PictureURL" alt="">
+                                        @if (item.PictureURL != null)
+                                        {
+                                            <img style="width: 180px; margin: auto;" src="data:image;base64,@System.Convert.ToBase64String(item.PictureURL)" />
+                                        }
                                     </div>
                                     <div class="Title">
                                         @item.Title
@@ -76,8 +80,8 @@
                         </div>
                     </div>
                     <div class="btn">
-                        <button class="close">Close</button>
-                        <button class="CheckOut">CHECK Out</button>
+                        <button class="close" style="color: black;" @onclick="NavigateBack">Close</button>
+                        <button class="CheckOut" @onclick="NavigateToCheckout">CHECK Out</button>
                     </div>
                 }
                 else
@@ -146,5 +150,15 @@
         await LocalStorage.SetItemAsync("cart", _Cart);
 
         StateHasChanged();
+    }
+
+    private void NavigateToCheckout()
+    {
+        _nav.NavigateTo("/checkout");
+    }
+
+    private void NavigateBack()
+    {
+        _nav.NavigateTo("/");
     }
 }
